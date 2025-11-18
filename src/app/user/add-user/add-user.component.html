@@ -1,0 +1,46 @@
+<div>
+    <div class="modal-header d-flex justify-space-between">
+        <div class="modal_heading">
+            <span *ngIf="!editMode">Add User</span><span *ngIf="editMode">Edit User</span></div>
+        <!-- <div class="close" (click)="cancel()">X</div> -->
+         <div>
+            <button type="button" aria-label="close" class="btn-close float-end" (click)="cancel()"></button>
+        </div>
+    </div>
+    <hr>
+    <div class="modal-body px-5 py-2" *ngIf="userForm">
+        <div>
+            <form [formGroup]="userForm">
+                <div class="pb-2">
+                    <div class="form_label">First Name</div>
+                    <input type="text" class="form_input w-100" name="firstName" formControlName="firstName" placeholder="Enter First Name">
+                </div>
+                <div class="pb-2">
+                    <div class="form_label">Last Name</div>
+                    <input type="text" class="form_input w-100" name="lastName" formControlName="lastName" placeholder="Enter Last Name">
+                </div>
+                <div class="pb-2">
+                    <div class="form_label">Email Address</div>
+                    <input type="email" class="form_input w-100" name="email" formControlName="email" placeholder="Enter Email ID">
+                </div>
+                <div class="pb-2">
+                    <div class="form_label">Password</div>
+                    <input type="password" class="form_input w-100" name="password" formControlName="password" placeholder="Enter Password">
+                </div>
+                <div class="pb-2">
+                    <div class="form_label">Mobile Number</div>
+                    <input type="number" class="form_input w-100" name="mobile" formControlName="mobile" placeholder="Enter Mobile" maxlength="10" minlength="10" required="true">
+                </div>
+                <div class="pt-5 d-flex justify-end">
+                    <div>
+                        <button class="cancel_button" (click)="cancel()">Cancel</button>
+                    </div>
+                    <div>
+                        <button class="button_style" (click)="addUser()" *ngIf="!editMode">Add</button>
+                        <button class="button_style" (click)="editUser()" *ngIf="editMode">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

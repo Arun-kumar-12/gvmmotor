@@ -1,0 +1,121 @@
+<div class="main_body">
+    <div class="content_margin">
+        <div class="row pb-4">
+            <div class="order_heading">Order List</div>
+        </div>
+        <mat-tab-group>
+            <mat-tab label="Rent">
+                <div class="row table_scroll px-2 py-4">
+                    <table class="table table-bordered text-center">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th class="table_cell">Car</th>
+                                <th class="table_cell">User</th>
+                                <th class="table_cell">Start Date</th>
+                                <th class="table_cell">End Date</th>
+                                <th class="table_cell">Status</th>
+                                <th class="table_cell">Final Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let order of orderList; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td class="table_cell pt-3">{{ order.car?.brand }} {{ order.car?.model }}</td>
+                                <td class="table_cell pt-3">{{ order.userEmail || 'Guest' }} ({{ order.userPhone || 'N/A' }})</td>
+                                <td class="table_cell pt-3">{{ formatDate(order.startTime) }}</td>
+                                <td class="table_cell pt-3">{{ formatDate(order.endTime) }}</td>
+                                <td class="table_cell">
+                                    <select class="form_input w-100"
+                                    [ngModel]="order.status"
+                                    (change)="changeBookingStatus(order, $event)">
+                                    <option *ngFor="let booking of bookingStatus" [value]="booking">
+                                        {{ booking }}
+                                    </option>
+                                    </select>
+                                <!-- <span [ngClass]="{
+                                    'badge bg-success': order.status === 'BOOKED',
+                                    'badge bg-warning text-dark': order.status === 'CANCELLED',
+                                    'badge bg-secondary': order.status === 'RETURNED'
+                                }">
+                                    {{ order.status }}
+                                </span> -->
+                                </td>
+                                <td class="table_cell pt-3">{{ order.finalAmount }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </mat-tab>
+            <mat-tab label="Sale">
+                <div class="row table_scroll px-2 py-4">
+                    <table class="table table-bordered text-center">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th class="table_cell">Car</th>
+                                <th class="table_cell">User</th>
+                                <th class="table_cell">Target Sale Price</th>
+                                <th class="table_cell">Expected Price</th>
+                                <th class="table_cell">Status</th>
+                                <th class="table_cell">Final Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let order of resaleList; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td class="table_cell pt-3">{{ order.car?.brand }} {{ order.car?.model }}</td>
+                                <td class="table_cell pt-3">{{ order.userEmail || 'Guest' }} ({{ order.userPhone || 'N/A' }})</td>
+                                <td class="table_cell pt-3">{{order.car?.resalePrice}}</td>
+                                <td class="table_cell pt-3">{{order.expectedPrice}}</td>
+                                <td class="table_cell">
+                                    <select class="form_input w-100"
+                                    [ngModel]="order.status"
+                                    (change)="changeResaleStatus(order, $event)">
+                                    <option *ngFor="let booking of resaleStatus" [value]="booking">
+                                        {{ booking }}
+                                    </option>
+                                    </select>
+                                <!-- <span [ngClass]="{
+                                    'badge bg-success': order.status === 'BOOKED',
+                                    'badge bg-warning text-dark': order.status === 'CANCELLED',
+                                    'badge bg-secondary': order.status === 'RETURNED'
+                                }">
+                                    {{ order.status }}
+                                </span> -->
+                                </td>
+                                <td class="table_cell pt-3">{{ order.finalAmount }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>
+<ng-template #amountModal let-modal let-c="close">
+    <div>
+    <div class="modal-header d-flex justify-space-between">
+        <div class="modal_heading">Finish the order</div>
+        <div class="close" (click)="cancel()">X</div>
+    </div>
+    <div class="modal-body px-md-5 py-md-4 p-2">
+        <div>
+            <div class="modal_description pb-2">Please add the total amount received</div>
+            <div class="form_label">Final Amount</div>
+            <div class="pb-4"><input class="form_input" type="number" [(ngModel)]="finalAmount" placeholder="Enter the amount"></div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="d-flex justify-end w-100">
+            <div>
+            <button type="button" class="cancel_button" (click)="cancel()">Cancel</button>
+
+            </div>
+            <div>
+            <button type="button" class="button_style" (click)="save()">save</button>
+            </div>
+        </div>
+    </div>
+</div>
+</ng-template>

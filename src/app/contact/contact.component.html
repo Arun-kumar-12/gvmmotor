@@ -1,0 +1,29 @@
+<div class="contact_section" (click)="openContactInfo()">
+    <img src="assets/icons/help-desk.png" class="help_icon">
+</div>
+
+<ng-template #contactInfo let-modal let-c="close">
+    <div class="modal-header justify-content-between">
+        <div>
+            <div class="header">Contact Organiser</div>
+            <div class="description">Reach out to us regarding any query.</div>
+        </div>
+        <div>
+            <button type="button" aria-label="close" class="btn-close float-end" (click)="cancel()"></button>
+        </div>
+    </div>
+    <div class="modal-body">
+        <div class="row align-center flex-nowrap pb-4">
+            <img src="assets/icons/person.svg" class="contact_icons">
+            <div class="contact_info">{{adminInfo?.[0]?.firstName + ' ' + adminInfo?.[0]?.lastName}}</div>
+        </div>
+        <div class="row align-center flex-nowrap pb-4">
+            <img src="assets/icons/phone-grey.svg" class="contact_icons">
+            <div class="contact_info">{{adminInfo?.[0]?.mobile}}</div>
+        </div>
+        <div class="row align-center flex-nowrap pb-4">
+            <img src="assets/icons/envelope.svg" class="contact_icons">
+            <div class="contact_info">{{adminInfo?.[0]?.email}}</div>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,38 @@
+<div class="header_container">
+    <div class="header_content">
+        <div class="company_logo">
+            <img src="assets/gvm_logo.png" class="company_logo">
+        </div> 
+        <div class="menu_container">
+            <div class="user_home d-flex align-center">
+                <div (click)="goToHome()" class="d-flex align-center justify-end cursor-pointer">
+                    <img src="assets/icons/house.png" class="icon_style">
+                    <div class="nav_header">Home</div>
+                </div>
+            </div>
+            <div>
+                <div class="d-flex align-center justify-end cursor-pointer">
+                    <button matButton [matMenuTriggerFor]="menu" class="mat_menu_button d-flex align-center">
+                        <img src="assets/icons/man.png" class="user_icon">
+                        <!-- <span class="nav_header">Menu</span> -->
+                    </button>
+                    <mat-menu #menu="matMenu">
+                    <button mat-menu-item  class="nav_header" (click)="goToProfile()">Profile</button>
+                    <button mat-menu-item  class="nav_header" (click)="goToOrders()" *ngIf="adminRole">Orders</button>
+                    <button mat-menu-item  class="nav_header" (click)="goToUsers()" *ngIf="adminRole">User</button>
+                    <button mat-menu-item *ngIf="showLoginButton || showLogoutButton">
+                        <div (click)="goToLogin()" *ngIf="showLoginButton && !showLogoutButton" class="d-flex align-center cursor-pointer pe-4">
+                            <!-- <img src="assets/icons/man.png" class="icon_style"> -->
+                            <div class="nav_header">Login</div>
+                        </div>
+                        <div (click)="logout()" *ngIf="showLogoutButton" class="d-flex align-center cursor-pointer pe-4">
+                            <!-- <img src="assets/icons/man.png" class="icon_style"> -->
+                            <div class="nav_header">Logout</div>
+                        </div>
+                    </button>
+                    </mat-menu>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

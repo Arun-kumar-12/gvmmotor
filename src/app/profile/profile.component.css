@@ -1,0 +1,42 @@
+.main_body{
+    height: 100%;
+    .content_margin{
+    padding: 50px 100px 30px 100px;
+}
+}
+
+
+.profile_heading{
+    font-size: 22px;
+    font-weight: 700;
+    color: #202124;
+    margin-bottom: 20px;
+}
+
+.user_history_heading{
+    font-size: 16px;
+    font-weight: 600;
+    color: #4a4a4a;
+    margin-bottom: 20px;
+}
+
+.car_link{
+    color: #0180d0;
+    font-weight: 600;
+}
+
+.table_scroll{
+    overflow-x: auto;
+}
+
+.table_cell{
+    min-width: 200px;
+}
+
+@media (max-width: 768px) {
+    .main_body{ 
+        .content_margin{
+            padding: 20px;
+        }
+    }
+}

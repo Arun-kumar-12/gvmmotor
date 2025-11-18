@@ -1,0 +1,43 @@
+<div>
+    <div class="modal-header d-flex justify-space-between">
+        <div class="modal_heading">Review the car</div>
+        <div>
+            <button type="button" aria-label="close" class="btn-close float-end" (click)="cancel()"></button>
+        </div>
+        <!-- <div class="close" (click)="cancel()">X</div> -->
+    </div>
+    <hr>
+    <div class="modal-body px-md-5 py-md-2 p-0">
+        <div>
+            <form [formGroup]="reviewForm">
+                <div class="pb-3">
+                    <div class="form_label pb-1">User Name <span class="text-danger"> *</span></div>
+                    <input type="text" class="form_input w-100" name="userName" formControlName="userName" placeholder="Enter Your Name">
+                </div>
+                <div class="pb-3">
+                    <div class="form_label pb-1">Email Id <span class="text-danger"> *</span></div>
+                    <input type="email" class="form_input w-100" formControlName="email" placeholder="Enter Email Id">
+                </div>
+                <div class="pb-3">
+                <div class="form_label">Rate what you feel <span class="text-danger"> *</span></div>
+                <ngb-rating [(rate)]="currentRate" [max]="5"></ngb-rating>
+                </div>
+                <div class="pb-2">
+                    <div class="form_label">Write a review <span class="text-danger"> *</span></div>
+                    <textarea  class="form_input w-100" name="description" formControlName="description" placeholder="Enter Description"></textarea>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer pt-4">
+        <div class="d-flex justify-end w-100">
+            <!-- <div class="pb-md-0 pb-4">
+            <button type="button" class="cancel_button" (click)="cancel()">Cancel</button>
+
+            </div> -->
+            <div>
+            <button type="button" class="button_style" (click)="addReview()">Add review</button>
+            </div>
+        </div>
+    </div>
+</div>

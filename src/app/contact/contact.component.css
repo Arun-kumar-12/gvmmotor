@@ -1,0 +1,45 @@
+.contact_section{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    .help_icon{
+        width: 50px;
+        height: 50px;
+    }
+}
+
+.contact_section:hover{
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.header{
+    color: #174188;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.description{
+    color: #5f6368;
+    font-size: 14px;
+}
+
+.contact_icons{
+    width: 55px;
+}
+
+.flex-nowrap{
+    flex-wrap: nowrap;
+}
+
+.contact_info{
+    color: #2f3030;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+@media (max-width: 768px){
+    .contact_section{
+        bottom: 80px;
+    }
+} 

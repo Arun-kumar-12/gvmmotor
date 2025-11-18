@@ -1,0 +1,45 @@
+<div class="main_body">
+    <div class="content_margin">
+        <div class="row pb-4 justify-content-between align-center">
+            <div class="col-12 col-md-2 order_heading">User List</div>
+            <div class="col-12 col-md-2" *ngIf="adminRole">
+                <button class="button_style" (click)="addNewUser()">Add user</button>
+            </div>
+        </div>
+        <div class="row table_scroll">
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th class="table_cell">Name</th>
+                        <th class="table_cell">Email</th>
+                        <th class="table_cell">Password</th>
+                        <th class="table_cell">Mobile</th>
+                        <th class="table_cell">Role</th>
+                        <th class="table_cell">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of userList; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td class="table_cell">{{ user.firstName }}  {{ user.lastName }}</td>
+                        <td class="table_cell">{{ user.email }}</td>
+                        <td class="table_cell">{{ user.password }}</td>
+                        <td class="table_cell">{{ user.mobile }}</td>
+                        <td class="table_cell">{{ user.role | titlecase }}</td>
+                        <td class="table_cell">
+                            <div class="d-flex justify-center">
+                                <div>
+                                    <img src="assets/icons/edit.png" class="action_icon" (click)="addNewUser(user)">
+                                </div>
+                                <div>
+                                    <img src="assets/icons/delete.png" class="action_icon" (click)="openDeleteUserModal(user)">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+.modal_heading{
+    font-size: 20px;
+    font-weight: 600;
+    color: #49494a;
+}
+
+.close{
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #49494a;
+}
+
+.resale_price_tag{
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.price_value{
+    color: #1a6fd1;
+}

@@ -1,0 +1,17 @@
+.modal_heading{
+    font-size: 20px;
+    font-weight: 600;
+    color: #49494a;
+}
+
+.modal_description{
+    font-size: 16px;
+    color: #606062;
+}
+
+.close{
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #49494a;
+}

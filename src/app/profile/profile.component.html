@@ -1,0 +1,80 @@
+<div class="main_body">
+    <div class="content_margin">
+        <div class="row pb-4">
+            <div class="profile_heading">User Information</div>
+        </div>
+        <div class="row" *ngIf="userForm">
+            <form [formGroup]="userForm">
+                <div class="row">
+                <div class="pb-4 col-12 col-md-3">
+                    <div class="form_label">First Name</div>
+                    <input type="text" class="form_input w-100" name="firstName" formControlName="firstName" placeholder="Enter First Name">
+                </div>
+                <div class="pb-4 col-12 col-md-3">
+                    <div class="form_label">Last Name</div>
+                    <input type="text" class="form_input w-100" name="lastName" formControlName="lastName" placeholder="Enter Last Name">
+                </div>
+                <div class="pb-4 col-12 col-md-3">
+                    <div class="form_label">Email Address</div>
+                    <input type="email" class="form_input w-100" name="email" formControlName="email" placeholder="Enter Email ID" readonly>
+                </div>
+                <div class="pb-4 col-12 col-md-3">
+                    <div class="form_label">Password</div>
+                    <input type="password" class="form_input w-100" name="password" formControlName="password" placeholder="Enter Password">
+                </div>
+                <div class="pb-4 col-12 col-md-3">
+                    <div class="form_label">Mobile Number</div>
+                    <input type="number" class="form_input w-100" name="mobile" formControlName="mobile" placeholder="Enter Mobile" maxlength="10" minlength="10" required="true">
+                </div>
+                </div>
+                <div class="d-flex justify-end">
+                    <div>
+                        <button class="cancel_button" (click)="goBack()">Go Back</button>
+                    </div>
+                    <div>
+                        <button class="button_style" (click)="editUser()">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row pt-4">
+            <div>
+                <div class="user_history_heading">User History</div>
+                 <div class="row table_scroll px-2 py-4">
+                    <table class="table table-bordered text-center">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th class="table_cell">Car Reg No</th>
+                                <th class="table_cell">Car Info</th>
+                                <th class="table_cell">Type</th>
+                                <th class="table_cell">Status</th>
+                                <th class="table_cell">Review</th>
+                                <th class="table_cell">Final Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let order of orderData; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td class="table_cell pt-3 cursor-pointer car_link" (click)="goToCarInfo(order.carId)">{{order.cars?.registrationNumber}}</td>
+                                <td class="table_cell pt-3">{{ order.cars?.brand }} {{ order.cars?.model }}</td>
+                                <td class="table_cell pt-3">{{ order.orderType }}</td>
+                                <td class="table_cell pt-3">{{order.status}}</td>
+                                <td class="table_cell">
+                                    <div *ngIf="order?.reviewRating">
+                                        <div><ngb-rating [rate]="order?.reviewRating" [max]="5"></ngb-rating></div>
+                                        <div>{{order?.reviewComment}}</div>
+                                    </div>
+                                    <div class="pt-1" *ngIf="!order?.reviewRating">
+                                        <span class="car_link cursor-pointer" (click)="addReviewPopup(order)">{{order.status === 'COMPLETED' ? 'Add a review':'--'}}</span>
+                                    </div>
+                                </td>
+                                <td class="table_cell pt-3">{{ order.finalAmount }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,234 @@
+
+.main_body{
+    /* background-color: #F5F5F5; */
+    height: 100%;
+    .content_margin{
+    padding: 50px 100px 30px 100px;
+    .car_card{
+        /* border: 1px solid #E0E0E0;
+        background-color: white; */
+        border-radius: 8px;
+        /* padding: 40px; */
+        /* box-shadow: 0px 2px 5px rgba(0,0,0,0.1); */
+    }
+}
+}
+
+.goBack{
+    color: #2152b9;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.car_image{
+    border-radius: 8px;
+    width: 350px;
+    height: 200px;
+}
+
+
+.car_header{
+    font-size: 26px;
+    font-weight: 700;
+    color: #202124;
+    margin-bottom: 20px;
+}
+.car_description{
+    font-size: 18px;
+    /* font-weight: 500; */
+    color: #3d3d3d;
+    margin-bottom: 20px;
+}
+
+.spec_heading{
+    font-size: 20px;
+    font-weight: 700;
+    color: #84006c;
+    margin-bottom: 10px;
+    font-family: cursive;
+    letter-spacing: 1px;
+}
+
+.first_column{
+    padding-right: 150px;
+}
+
+.second_column{
+    padding-left: 100px;
+}
+
+.third_column{
+    padding-left: 150px;
+}
+
+.info_heading{
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.car_info_heading{
+    font-size: 16px;
+    font-weight: 600;
+    color: #878787;
+    text-transform: uppercase;
+}
+
+.info_description{
+    font-size: 16px;
+    color: #717171;
+}
+
+.car_info_card{
+    border: 1px solid #E0E0E0;
+    background: linear-gradient(225deg, rgb(245, 244, 253), rgb(252, 252, 253));
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+    flex: 1;
+}
+
+.review_card{
+    border: 1px solid #f2f2f2;
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+    flex: 1;
+}
+
+.info_icon{
+    width: 70px;
+    height: 70px;
+}
+
+.benefits_icon{
+    width: 50px;
+    height: 50px;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  background-color: #7d7d7d;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 3px 7px;
+}
+
+.footer{
+    position: fixed;
+    bottom: 0;
+    background-color: white;
+    padding: 10px 70px;
+    width: calc(100% - 100px);
+    /* box-shadow: 0px -2px 5px rgba(0,0,0,0.1); */
+}
+
+.add_review{
+    color: #2152b9;
+    font-weight: 650;
+    font-size: 16px;
+}
+
+.review_user{
+    font-size: 18px;
+    font-weight: 600;
+    color: #202124;
+}
+
+.review_description{
+    font-size: 14px;
+    color: #3d3d3d;
+}
+
+.review_date{
+    font-size: 12px;
+    color: #7d7d7d;
+}
+
+.avatar_circle{
+    width: 40px;
+    height: 40px;
+}
+
+.add_section{
+    position: fixed;
+    bottom: 100px;
+    right:20px;
+    .add_icon{
+        width: 50px;
+        height: 50px;
+    }
+}
+
+
+.add_section:hover{
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.delete_section{
+    /* hidden by default, shown on hover of the card or header */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s ease-in-out, visibility 0.15s ease-in-out;
+    cursor: pointer;
+}
+
+.review_card:hover .delete_section,
+.review_user:hover .delete_section {
+    opacity: 1;
+    visibility: visible;
+}
+
+.delete_icon{
+    width: 20px;
+    height: 20px;
+}
+
+.car_reg_section{
+    font-size: 16px;
+    font-weight: 700;
+    color: #2152b9;
+}
+
+.car_reg{
+    font-size: 14px;
+    font-weight: 600;
+    color: #3d3d3d;
+}
+
+.arrow{
+    font-size: 20px;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .main_body{
+        .content_margin{
+            padding: 10px;
+        }
+    }
+
+    .car_image{
+        border-radius: 8px;
+        width: 100%;
+        height: 200px;
+    }
+
+    .footer{
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .add_section{
+        bottom: 150px;
+    }
+    /* On small screens (no hover), always show delete icon */
+    .delete_section{
+        opacity: 1;
+        visibility: visible;
+    }
+}
+

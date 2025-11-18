@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonServiceService } from './service/common-service.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'gvmmotor';
+  constructor(private service:CommonServiceService){}
+
+  ngOnInit(): void {
+    if(sessionStorage.getItem("userId")){
+      this.service.emitUserLogin(true);
+    }
+  }
 }

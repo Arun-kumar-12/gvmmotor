@@ -1,0 +1,30 @@
+<div class="login_section">
+    <div class="login_background position-relative">
+        <img src="assets/user_login.jpg" class="login_image bg_image_big">
+        <img src="assets/user_login_mobile.jpg" class="login_image bg_image_small">
+    </div>
+    <div class="position-absolute login_content">
+        <div class="popup_content">
+            <div class="heading_center w-100">
+                <!-- <h2 class="heading_label">Welcome to GVM</h2> -->
+                <img src="assets/gvm_logo.png" class="company_logo">
+            </div>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div class="input_section">
+                    <div class="form_label">Email ID</div>
+                    <input type="text" class="form_input w-100" name="email" formControlName="email" placeholder="Please Enter Email Id">
+                </div> 
+                <div class="input_section">
+                    <div class="form_label">Password</div>
+                    <input type="password" class="form_input w-100" formControlName="password" placeholder="Please Enter Your Password">
+                </div> 
+                <div>
+                    <button type="submit" class="button_style">Login</button>
+                </div>
+            </form>
+            <div class="pt-2">
+                <div>If you don't have account, please <span class="text-primary cursor-pointer" (click)="addUser()">signup</span></div>
+            </div>
+        </div>
+    </div>
+</div>

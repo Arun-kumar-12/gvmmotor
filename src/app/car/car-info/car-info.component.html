@@ -1,0 +1,266 @@
+<div class="main_body">
+<div *ngIf="carData" class="content_margin">
+    <div class="row pb-4 justify-space-between">
+        <div class="col-12 col-md-2 goBack" (click)="goToHome()"> <span class="arrow"><</span> Go Back</div>
+        <!-- <div class="col-12 col-md-2" *ngIf="adminRole">
+            <button type="button" class="button_style" (click)="goToEdit()">Edit</button>
+        </div> -->
+    </div>
+    <div class="car_card">
+        <div class="row d-flex justify-space-between pb-3">
+            <div class="col-12 col-md-6">
+                <div class="car_header">{{carData.brand}}, {{carData.model}}, {{carData.year}}</div>
+                <div class="car_description">{{carData.type.toLowerCase() | titlecase}}<span class="dot"></span>{{carData.fuelType.toLowerCase() | titlecase}}<span class="dot"></span>{{carData.seatCapacity}} Seater</div>
+                <div class="car_description pb-4">{{carData.description}}</div>
+                <div *ngIf="getAvgRating()" class="pb-2 d-flex align-center">
+                    <div><img src="assets/icons/star.png" class="icon_style"></div>
+                    <div class="pt-1">{{getAvgRating() | number:'1.1-1'}} Out of 5 ( {{carRatings?.length}} Reviewers )</div>
+                </div>
+                <div class="pb-4">
+                    <span class="add_review cursor-pointer" (click)="addReviewPopup()">
+                        Write a review
+                    </span>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="d-flex justify-end">
+                    <img [src]="carData.imageUrl || 'assets/car1.jpg'" class="car_image">
+                </div>
+                <div class="car_reg_section pt-2 text-end">Registration Number : <span class="car_reg">{{carData?.registrationNumber}}</span></div>
+            </div>
+        </div>
+        <!-- <hr> -->
+        <div class="row pt-3 pb-2">
+            <div class="spec_heading">Additional Information</div>
+        </div>
+        <div class="row pb-5">
+            <div class="col-12 col-md-4 d-flex pb-2">
+                <div class=" car_info_card d-flex justify-space-around align-center">   
+                    <div>
+                        <img src="assets/icons/car_technician.png" class="info_icon">
+                    </div>
+                    <div>
+                        <div class="car_info_heading pb-2">Basic Information</div>
+                        <div class="info_heading">Color : <span class="info_description">{{carData?.color}}</span></div>
+                        <div class="info_heading">Fuel Type : <span class="info_description">{{carData?.fuelType | titlecase}}</span></div>
+                        <div class="info_heading">Seat Capacity : <span class="info_description">{{carData?.seatCapacity}}</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 d-flex pb-2">
+                <div class=" car_info_card d-flex justify-space-around align-center">   
+                    <div>
+                        <img src="assets/icons/person_performance.png" class="info_icon">
+                    </div>
+                    <div>
+                        <div class="car_info_heading pb-2">Performance</div>
+                        <div class="info_heading">Total Kilometer : <span class="info_description">{{carData?.totalKilometer}}</span></div>
+                        <div class="info_heading">No of Owner : <span class="info_description">{{carData?.owners}}</span></div>
+                        <div class="info_heading">Mileage : <span class="info_description">{{carData?.mileage}}</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 d-flex pb-2">
+                <div class=" car_info_card d-flex justify-space-around align-center">   
+                    <div>
+                        <img src="assets/icons/car-usage.png" class="info_icon">
+                    </div>
+                    <div>
+                        <div class="car_info_heading pb-2">Availability</div>
+                        <div class="info_heading">Available for rent : <span class="info_description">{{carData?.availableForRent}}</span></div>
+                        <div class="info_heading">Available for sale : <span class="info_description">{{carData?.availableForResale}}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <div class="row pt-3 pb-2" *ngIf="carData?.carIssues && carData?.carIssues != ''">
+            <div class="spec_heading">Issues Requiring Attention</div>
+        </div>
+         <div class="row pb-4" *ngIf="carData?.carIssues && carData?.carIssues != ''">
+            <div class="col-12 d-flex">
+                <span class="car_description" [innerHTML]="carData?.carIssues"></span>
+            </div>
+         </div>
+        <div class="row pt-3 pb-2">
+            <div class="spec_heading">Our Benefits</div>
+        </div>
+        <div class="row pb-5">
+            <div class="col-12 col-md-4 d-flex pb-4">
+                <div class="p-2 d-flex justify-space-around align-center">   
+                    <div class="pe-4">
+                        <img src="assets/icons/cancel.png" class="benefits_icon">
+                    </div>
+                    <div>
+                        <div class="info_heading">Free Cancellation</div>
+                        <div class="info_description">Cancel up to 24 hours before pickup without any charge.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 d-flex pb-4">
+                <div class="p-2 d-flex justify-space-around align-center">   
+                    <div class="pe-4">
+                        <img src="assets/icons/service.png" class="benefits_icon">
+                    </div>
+                    <div>
+                        <div class="info_heading">Regularly Serviced & Maintained</div>
+                        <div class="info_description">All cars undergo routine inspection for safety and performance.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 d-flex pb-4">
+                <div class="p-2 d-flex justify-space-around align-center">   
+                    <div class="pe-4">
+                        <img src="assets/icons/clean.png" class="benefits_icon">
+                    </div>
+                    <div>
+                        <div class="info_heading">Neat & Clean Vehicles</div>
+                        <div class="info_description">Professionally cleaned and sanitized before every ride.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 d-flex pb-4">
+                <div class="p-2 d-flex justify-space-around align-center">   
+                    <div class="pe-4">
+                        <img src="assets/icons/health-insurance.png" class="benefits_icon">
+                    </div>
+                    <div>
+                        <div class="info_heading">Fully Insured Cars</div>
+                        <div class="info_description">Drive worry-free with complete insurance coverage.</div>
+                    </div>
+                </div>
+            </div>
+             <div class="col-12 col-md-4 d-flex pb-4">
+                <div class="p-2 d-flex justify-space-around align-center">   
+                    <div class="pe-4">
+                        <img src="assets/icons/pay.png" class="benefits_icon">
+                    </div>
+                    <div>
+                        <div class="info_heading">Pay After the Ride</div>
+                        <div class="info_description">Enjoy your trip first, pay later with flexible options.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 d-flex pb-4">
+                <div class="p-2 d-flex justify-space-around align-center">   
+                    <div class="pe-4">
+                        <img src="assets/icons/help-desk.png" class="benefits_icon">
+                    </div>
+                    <div>
+                        <div class="info_heading">24×7 Roadside Assistance</div>
+                        <div class="info_description">Help is always just one call away.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row pt-3 pb-2">
+            <div class="spec_heading">Rules and Regulations</div>
+        </div>
+        <div class="row pb-5">
+            <div class="col-12 col-md-4 d-flex pb-4">
+                <div class="p-2 d-flex justify-space-around align-center">   
+                    <div class="pe-4">
+                        <img src="assets/icons/certificate.png" class="benefits_icon">
+                    </div>
+                    <div>
+                        <div class="info_heading">Valid Driving License Required</div>
+                        <div class="info_description">A valid Indian driving license must be shown at pickup.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 d-flex pb-4">
+                <div class="p-2 d-flex justify-space-around align-center">   
+                    <div class="pe-4">
+                        <img src="assets/icons/proof-of-concept.png" class="benefits_icon">
+                    </div>
+                    <div>
+                        <div class="info_heading">Government ID Proof Mandatory</div>
+                        <div class="info_description">Aadhar Card, PAN Card, or Passport copy required.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 d-flex pb-4">
+                <div class="p-2 d-flex justify-space-around align-center">   
+                    <div class="pe-4">
+                        <img src="assets/icons/traffic.png" class="benefits_icon">
+                    </div>
+                    <div>
+                        <div class="info_heading">Traffic Violations Are Customer’s Responsibility</div>
+                        <div class="info_description">Any challans, fines, or penalties must be paid by the renter.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 d-flex pb-4">
+                <div class="p-2 d-flex justify-space-around align-center">   
+                    <div class="pe-4">
+                        <img src="assets/icons/late.png" class="benefits_icon">
+                    </div>
+                    <div>
+                        <div class="info_heading">Late Return Charges Apply</div>
+                        <div class="info_description">Delays beyond grace period will attract hourly charges.</div>
+                    </div>
+                </div>
+            </div>
+             <div class="col-12 col-md-4 d-flex pb-4">
+                <div class="p-2 d-flex justify-space-around align-center">   
+                    <div class="pe-4">
+                        <img src="assets/icons/fuel.png" class="benefits_icon">
+                    </div>
+                    <div>
+                        <div class="info_heading">Fuel Policy</div>
+                        <div class="info_description">Return the car with the same fuel level as received.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 d-flex pb-4">
+                <div class="p-2 d-flex justify-space-around align-center">   
+                    <div class="pe-4">
+                        <img src="assets/icons/accident.png" class="benefits_icon">
+                    </div>
+                    <div>
+                        <div class="info_heading">In Case of Accident</div>
+                        <div class="info_description">Report immediately; insurance terms will apply.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row pb-2" *ngIf="carRatings?.length > 0">
+            <div class="spec_heading">Review</div>
+        </div>
+        <div class="row pb-5" *ngIf="carRatings?.length > 0">
+            <div class="col-12 col-md-3 d-flex pb-4" *ngFor="let rating of carRatings">
+                <div class="review_card d-flex"> 
+                    <div class="w-100">
+                        <div class="review_user pb-2 d-flex align-center justify-space-between">
+                            <div class="d-flex align-center">
+                                <div class=" pe-4">
+                                    <img src="assets/icons/man.png" class="avatar_circle">
+                                </div>
+                                <div class="px-2">{{ rating.userName }}</div>
+                            </div>
+                            <div class="delete_section">
+                                <div><img src="assets/icons/delete_icon.png" class="delete_icon" (click)="deleteReviewModal(rating)"></div>
+                            </div>
+                        </div>  
+                        <div class="pb-2"><ngb-rating [(rate)]="rating.rating" [max]="5"></ngb-rating></div>
+                        <div class="review_description pb-2">{{rating.description}}</div>
+                        <hr class="pb-2">
+                        <div class="review_date pb-2">{{rating.reviewDate | date}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-end footer">
+            <div class="col-md-6 col-12 d-flex justify-end pb-2">
+                <div><button class="cancel_button" (click)="goToHome()">Go back</button></div>
+                <div class="pe-4"><button class="button_style" (click)="openBuyModal()" *ngIf="carData.availableForResale">Buy Now</button></div>
+                <div><button class="button_style" (click)="openBookingModal()" *ngIf="carData.availableForRent">Book Now</button></div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="add_section" *ngIf="adminRole">
+    <img src="assets/icons/edit_car.png" class="add_icon" (click)="goToEdit()">
+    <!-- <button class="button_style" type="button" (click)="goToAddNewCar()">Add</button> -->
+</div>

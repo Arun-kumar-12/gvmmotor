@@ -1,0 +1,12 @@
+.modal_heading{
+    font-size: 20px;
+    font-weight: 600;
+    color: #49494a;
+}
+
+.close{
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #49494a;
+}

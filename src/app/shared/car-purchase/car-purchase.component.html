@@ -1,0 +1,40 @@
+<div>
+    <div class="modal-header d-flex justify-space-between">
+        <div class="modal_heading">Purchase</div>
+        <!-- <div class="close" (click)="cancel()">X</div> -->
+         <div>
+            <button type="button" aria-label="close" class="btn-close float-end" (click)="cancel()"></button>
+        </div>
+    </div>
+    <hr>
+    <div class="modal-body px-md-5 py-md-2 p-0">
+        <div>
+            <div class="resale_price_tag pb-4"><span>The Resale Price is : </span><span class="price_value">{{this.receiveDialogData?.carData?.resalePrice}}</span></div>
+            <form [formGroup]="carPurchaseForm">
+                <div class="pb-4">
+                    <div class="form_label">Please Enter Your Email Id  <span class="text-danger"> *</span></div>
+                    <input type="email" class="form_input w-100" name="email" formControlName="email" placeholder="Enter Email Id">
+                </div>
+                <div class="pb-4">
+                    <div class="form_label">Please Enter Your Phone No <span class="text-danger"> *</span></div>
+                    <input type="number" class="form_input w-100" name="phone" formControlName="phone" placeholder="Enter Phone No" maxlength="10">
+                </div>
+                <div class="pb-4">
+                    <div class="form_label">Please Enter Your Expected Price <span class="text-danger"> *</span></div>
+                    <input type="number" class="form_input w-100" name="expected" formControlName="expectedPrice" placeholder="Enter Expected Price">
+                </div> 
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer pt-4">
+        <div class="d-flex justify-end w-100">
+            <!-- <div class="pb-4">
+            <button type="button" class="cancel_button" (click)="cancel()">Cancel</button>
+
+            </div> -->
+            <div>
+            <button type="button" class="button_style" (click)="bookCar()">Buy</button>
+            </div>
+        </div>
+    </div>
+</div>

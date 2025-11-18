@@ -1,0 +1,26 @@
+<div>
+    <div class="modal-header d-flex justify-space-between">
+        <div class="modal_heading">{{receiveDialogData?.heading}}</div>
+        <!-- <div class="close" (click)="cancel()">X</div> -->
+         <div>
+            <button type="button" aria-label="close" class="btn-close float-end" (click)="cancel()"></button>
+        </div>
+    </div>
+    <hr>
+    <div class="modal-body p-2">
+        <div>
+            <div class="modal_description">{{receiveDialogData?.message}}</div>
+        </div>
+    </div>
+    <div class="modal-footer pt-4">
+        <div class="d-flex justify-end w-100">
+            <!-- <div class="pb-4">
+            <button type="button" class="cancel_button" (click)="cancel()">Cancel</button>
+
+            </div> -->
+            <div>
+            <button type="button" class="button_style" (click)="confirm()">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>

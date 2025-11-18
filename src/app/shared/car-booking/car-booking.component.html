@@ -1,0 +1,56 @@
+<div>
+    <div class="modal-header d-flex justify-space-between">
+        <div class="modal_heading">Book your car</div>
+        <div>
+            <button type="button" aria-label="close" class="btn-close float-end" (click)="cancel()"></button>
+        </div>
+        <!-- <div class="close" (click)="cancel()">X</div> -->
+    </div>
+    <hr>
+    <div class="modal-body px-md-5 py-md-2 p-0">
+        <div>
+            <div class="d-flex justify-content-between pb-4">
+                <div><span class="form_label">Per Day : </span><span class="header">₹ {{receiveDialogData?.carData?.rentPerDay}}</span></div>
+                <div><span class="form_label">Per Km : </span><span class="header">₹ {{receiveDialogData?.carData?.rentPerKm}}</span></div>
+            </div>
+            <form [formGroup]="carBookingform">
+                <div class="pb-4">
+                    <div class="form_label">Please Enter Your Email Id  <span class="text-danger"> *</span></div>
+                    <input type="email" class="form_input w-100" name="email" formControlName="email" placeholder="Enter Email Id">
+                </div>
+                <div class="pb-4">
+                    <div class="form_label">Please Enter Your Phone No  <span class="text-danger"> *</span></div>
+                    <input type="number" class="form_input w-100" name="phone" formControlName="phone" placeholder="Enter Phone No" maxlength="10">
+                </div>
+                <div class="datepickers">
+                    <div class="form_label">Please Select the Date range  <span class="text-danger"> *</span></div>
+                    <form [formGroup]="range" (ngSubmit)="onRangeChange()">
+                    <mat-form-field appearance="fill" class="w-100">
+                            <!-- <mat-label>Choose date range</mat-label> -->
+                            <mat-date-range-input [rangePicker]="picker">
+                                    <input matStartDate formControlName="start" [min]="minDate" placeholder="Start date" matInput>
+                                    <input matEndDate formControlName="end" [min]="range.get('start')?.value || minDate" placeholder="End date" matInput>
+                            </mat-date-range-input>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-date-range-picker #picker></mat-date-range-picker>
+                        </mat-form-field>             
+                    </form>
+                </div>  
+            </form>
+            <div class="pt-4">
+                <div><span class="header_note">Note : </span> <span class="header"> If you are travelling more than 400km a day, then we will charge you rate per km.</span></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer pt-4">
+        <div class="d-flex justify-end w-100">
+            <!-- <div class="pb-4">
+            <button type="button" class="cancel_button" (click)="cancel()">Cancel</button>
+
+            </div> -->
+            <div>
+            <button type="button" class="button_style" (click)="bookCar()">Book</button>
+            </div>
+        </div>
+    </div>
+</div>

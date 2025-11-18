@@ -1,0 +1,27 @@
+.modal_heading{
+    font-size: 20px;
+    font-weight: 600;
+    color: #49494a;
+}
+
+.close{
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #49494a;
+}
+
+.header_note{
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #202020;
+    text-transform: uppercase;
+}
+
+.header{
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #49494a;
+}

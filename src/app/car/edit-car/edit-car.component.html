@@ -1,0 +1,160 @@
+<div class="main_body">
+    <div class="content_margin">
+        <div class="row">
+            <div class="goBack pb-4" (click)="goToHome()">
+                <span class="arrow"><</span> Go Back
+            </div>
+            <div class="add_heading pb-4">
+                <span *ngIf="!carId">Add New Car</span><span *ngIf="carId">Edit Car</span>
+            </div>
+        </div>
+        <div *ngIf="carForm">
+            
+        <form [formGroup]="carForm">
+        <div class="row pb-4">
+            <div class="col-12 col-md-3">
+                <div class="row">
+                    <div class="col-12 pb-4">
+                        <div class="form_label">Image <span class="text-danger"> *</span></div>
+                        <div class="image_section" *ngIf="!previewImage">
+                             <div
+                                class="upload_section position-relative cursor-pointer"
+                                (click)="openMediaDialog()">
+                                <div class="position-absolute plus_icon_section">
+                                    <img src="assets/icons/plus.png" class="plus_icon">
+                                </div>
+                            </div>
+                           <input #uploader type="file" accept="image/png, image/jpg, image/jpeg" class="d-none" (change)="onFileSelected($event)">
+                        </div>
+                        <div class="image_section" *ngIf="previewImage">
+                            <div
+                                class="upload_section position-relative cursor-pointer edit_image_section"
+                                (click)="openMediaDialog()">
+                                
+                                <img [src]="previewImage" class="w-100 h-100 position-relative">
+                                <div class="position-absolute edit_icon_section">
+                                    <img src="assets/icons/edit.png" class="plus_icon edit_hover">
+                                </div>
+                            </div>
+                            <!-- <div class="position-absolute plus_icon_section" (click)="uploader.click()">Edit</div> -->
+                            <input #uploader type="file" accept="image/png, image/jpg, image/jpeg" class="d-none" (change)="onFileSelected($event)">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="col-md-12 pb-4">
+                            <div class="form_label">Description <span class="text-danger"> *</span></div>
+                            <textarea class="form_input text_area w-100" formControlName="description" placeholder="Enter Description" ></textarea>
+                        </div>
+                    </div>
+                    <!-- <div class="col-12">
+                        <div class="col-md-12 pb-4">
+                            <div class="form_label">Issues Requiring Attention</div>
+                            <textarea class="form_input text_area w-100" formControlName="carIssues" placeholder="Enter Issues Requiring Attention" ></textarea>
+                        </div>
+                    </div> -->
+                    <div class="custom-blog-angular-editor">
+                        <div class="form_label">Issues Requiring Attention<span class="text-danger"> *</span></div>
+                        <angular-editor formControlName="carIssues" [config]="angularEditorConfig"></angular-editor>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-9"> 
+                <div class="row">
+                    <div class="col-md-4 pb-4">
+                        <div class="form_label">Brand <span class="text-danger"> *</span></div>
+                        <input class="form_input w-100" formControlName="brand" type="text" name="brand" placeholder="Enter brand">
+                    </div>
+                    <div class="col-md-4 pb-4">
+                        <div class="form_label">Model <span class="text-danger"> *</span></div>
+                        <input class="form_input w-100" formControlName="model" type="text" name="model" placeholder="Enter Model">
+                    </div>
+                    <div class="col-md-4 pb-4">
+                        <div class="form_label">Year <span class="text-danger"> *</span></div>
+                        <input class="form_input w-100"  formControlName="year" type="number" name="year" placeholder="Enter Year">
+                    </div>
+                    <div class="col-md-4 pb-4">
+                        <div class="form_label">Reg No <span class="text-danger"> *</span></div>
+                        <input class="form_input w-100"  formControlName="registrationNumber" type="text" name="regNo" placeholder="Enter Registration Number">
+                    </div>
+                    <div class="col-md-4 pb-4">
+                        <div class="form_label">Color <span class="text-danger"> *</span></div>
+                        <input class="form_input w-100" formControlName="color" type="text" name="color" placeholder="Enter Color">
+                    </div>
+                    <div class="col-md-4 pb-4">
+                        <div class="form_label">Total Kilometer <span class="text-danger"> *</span></div>
+                        <input class="form_input w-100" formControlName="totalKilometer" type="number" name="totalkm" placeholder="Enter Total Kilometer">
+                    </div>
+                    <div class="col-md-4 pb-4">
+                        <div class="form_label">Owners <span class="text-danger"> *</span></div>
+                        <input class="form_input w-100"  formControlName="owners" type="number" name="owners" placeholder="Enter Onwer Count">
+                    </div>
+                    <div class="col-md-4 pb-4">
+                        <div class="form_label">Mileage <small>(km/hr)</small> <span class="text-danger"> *</span></div>
+                        <input class="form_input w-100" formControlName="mileage" type="number" name="Mileage" placeholder="Enter Mileage">
+                    </div>
+                    <div class="col-md-4 pb-4">
+                        <div class="form_label">Cost Price <span class="text-danger"> *</span></div>
+                        <input class="form_input w-100" formControlName="costPrice" type="Number" name="costPrice" placeholder="Enter Cost Price">
+                    </div>
+                    <div class="col-md-4 pb-4">
+                        <div class="form_label">Resale Price <span class="text-danger"> *</span></div>
+                        <input class="form_input w-100" formControlName="resalePrice" type="number" name="resalePrice" placeholder="Enter Resale Price">
+                    </div>
+                    <div class="col-md-4 pb-4">
+                        <div class="form_label">Rent Per Day <span class="text-danger"> *</span></div>
+                        <input class="form_input w-100" formControlName="rentPerDay" type="number" name="rentPerDay" placeholder="Enter Rent Per Day">
+                    </div>
+                    <div class="col-md-4 pb-4">
+                        <div class="form_label">Rent Per Km <span class="text-danger"> *</span></div>
+                        <input class="form_input w-100" formControlName="rentPerKm" type="number" name="rentPerKm" placeholder="Enter Rent Per Km">
+                    </div>
+                    <div class="col-md-4 pb-4">
+                        <div class="form_label">Buying Date <span class="text-danger"> *</span></div>
+                        <input class="form_input w-100" formControlName="buyingDate" type="date"  name="buyingDate" placeholder="Choose Date">
+                    </div>
+                    <div class="col-md-4 pb-4">
+                        <div class="form_label">Fuel Type <span class="text-danger"> *</span></div>
+                        <!-- <input class="form_input w-100" type="Text" placeholder="Enter Fuel Type"> -->
+                        <select class="form_input w-100"  formControlName="fuelType" placeholder="Enter Fuel Type">
+                            <option>Petrol</option>
+                            <option>Diesel</option>
+                            <option>Electric</option>
+                            <option>Hybrid</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 pb-4">
+                        <div class="form_label">Seat Capacity <span class="text-danger"> *</span></div>
+                        <input class="form_input w-100" formControlName="seatCapacity" name="seatCapacity" type="number" placeholder="Enter Seat Capacity">
+                    </div>
+                    <div class="col-md-4 pb-4">
+                        <div class="form_label">Type <span class="text-danger"> *</span></div>
+                        <!-- <input class="form_input w-100" type="Text" placeholder="Enter Fuel Type"> -->
+                        <select class="form_input w-100"  formControlName="type" placeholder="Enter Fuel Type">
+                            <option>Manual</option>
+                            <option>Automatic</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 pb-4">
+                        <div class="form_label">Availability <span class="text-danger"> *</span></div>
+                        <div class="d-flex">
+                        <input class="form_input" formControlName="availableForSale" type="checkbox"><div class="ps-2"> <span class="availability_option">Available for Sale</span></div>
+                        </div>
+                        <div class="d-flex">
+                            <input class="form_input" formControlName="availableForRent" type="checkbox"><div class="ps-2"><span class="availability_option">Available for Rent</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row pt-4 justify-end">
+            <div class="col-md-4 col-12 d-flex pb-2">
+                <button class="cancel_button" (click)="goToHome()">Go back</button>
+                <button class="button_style" (click)="addNewCar()" *ngIf="!editCar">Add new</button>
+                <button class="button_style" (click)="editCarInfo()" *ngIf="editCar">Save</button>
+            </div>
+        </div>
+        </form>
+        </div>
+    </div>
+</div>
