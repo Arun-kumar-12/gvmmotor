@@ -176,9 +176,6 @@ mat-tab-body .mat-tab-body-content{
   margin-right: -6px;
 }
 
-.contact-modal{
-}
-
 
 .modal-dialog{
     width: 400px;
@@ -224,8 +221,6 @@ mat-tab-body .mat-tab-body-content{
 @media (max-width: 768px) {
     .car-booking-modal{
         width: 100% !important;
-    }
-    .contact-modal{
     }
 
     
