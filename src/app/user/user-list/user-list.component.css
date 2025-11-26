@@ -9,18 +9,17 @@ table {
 }
 
 .main_body{
-    /* background-color: #F5F5F5; */
     height: 100%;
-    .content_margin{
-    padding: 50px 100px 30px 100px;
-    .car_card{
-        /* border: 1px solid #E0E0E0;
-        background-color: white; */
-        border-radius: 8px;
-        /* padding: 40px; */
-        /* box-shadow: 0px 2px 5px rgba(0,0,0,0.1); */
-    }
 }
+
+
+.content_margin{
+    padding: 50px 100px 30px 100px;
+}
+
+
+.car_card{
+    border-radius: 8px;
 }
 
 .order_heading{

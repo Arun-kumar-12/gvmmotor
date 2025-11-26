@@ -1,8 +1,9 @@
 .main_body{
     height: 100%;
-    .content_margin{
-    padding: 50px 100px;
 }
+
+.content_margin{
+    padding: 50px 100px;
 }
 
 .goBack{
@@ -62,10 +63,8 @@
     display: none;
 }
 
-.edit_image_section:hover{
-    .edit_hover{
+.edit_hover{
     display: block;
-}
 }
 
 .plus_icon{
@@ -92,9 +91,10 @@
 @media (max-width: 768px) {
     .main_body{
     height: 100%;
+}
+
     .content_margin{
     padding: 20px;
-}
 }
 .car_image{
         border-radius: 8px;

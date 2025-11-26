@@ -127,9 +127,11 @@ mat-form-field .mat-form-field-wrapper .mat-form-field-flex {
 
 .car-booking-modal{
     width: 600px !important;
-    .mat-dialog-container{
-        border-radius: 10px;
-    }
+}
+
+
+.mat-dialog-container{
+    border-radius: 10px;
 }
 
 ngb-rating{
@@ -175,13 +177,16 @@ mat-tab-body .mat-tab-body-content{
 }
 
 .contact-modal{
-    .modal-dialog{
-        width: 400px;
-        .modal-content{
-            padding: 10px 20px;
-            border-radius: 16px;
-        }
-    }
+}
+
+
+.modal-dialog{
+    width: 400px;
+}
+
+.modal-content{
+    padding: 10px 20px;
+    border-radius: 16px;
 }
 
 .two_line{
@@ -193,9 +198,8 @@ mat-tab-body .mat-tab-body-content{
     min-height: 40px;
 }
 
-.custom-blog-angular-editor {
-    angular-editor {
-        img{
+
+    .img{
             width: 100%;
         }
         .angular-editor-textarea {
@@ -205,8 +209,6 @@ mat-tab-body .mat-tab-body-content{
             background-color: white !important ;
             padding: 0.2rem 0 0 0;
         }
-    }
-}
 
 .angular-editor-textarea{
     font-size: 14px;
@@ -224,10 +226,12 @@ mat-tab-body .mat-tab-body-content{
         width: 100% !important;
     }
     .contact-modal{
+    }
+
+    
         .modal-dialog{
         width: 100%;
         }
-    }
     
     
 }
