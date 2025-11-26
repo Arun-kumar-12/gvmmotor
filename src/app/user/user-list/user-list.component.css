@@ -49,9 +49,8 @@ table {
 }
 
 @media (max-width: 768px) {
-    .main_body{ 
+    
         .content_margin{
             padding: 20px;
         }
-    }
 }
