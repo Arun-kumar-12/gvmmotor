@@ -56,7 +56,7 @@
                 <div class="d-flex justify-space-between p-3" (click)="routeToCarInfo(car.id)">
                     <div>
                         <div class="card_content_header pb-2">{{car.brand}}, {{car.model}}, {{car.year}}</div>
-                        <div class="card_content_hint two_line">{{car.description}}</div>
+                        <div class="card_content_hint two_line" [ngbTooltip]="car.description">{{car.description}}</div>
                         <div class="card_content_hint pb-2 pt-2">{{car.type.toLowerCase() | capitalize}}<span class="dot"></span>{{car.fuelType.toLowerCase() | capitalize}}<span class="dot"></span>{{car.seatCapacity}} Seater</div>
                         <div class="card_content_hint">Mileage - {{car.mileage}} km/hr</div>
                     </div>

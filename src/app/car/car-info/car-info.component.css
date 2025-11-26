@@ -117,6 +117,7 @@
 }
 
 .footer{
+    z-index: 2;
     position: fixed;
     bottom: 0;
     background-color: white;
@@ -202,6 +203,12 @@
 .arrow{
     font-size: 20px;
     font-weight: 700;
+}
+
+.demo-inline-calendar-card{
+    width: 100%;
+    border: 1px solid lightgrey;
+    /* height: 300px; */
 }
 
 @media (max-width: 768px) {

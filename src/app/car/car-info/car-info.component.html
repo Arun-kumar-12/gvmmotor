@@ -24,63 +24,119 @@
             </div>
             <div class="col-12 col-md-6">
                 <div class="d-flex justify-end">
-                    <img [src]="carData.imageUrl || 'assets/car1.jpg'" class="car_image">
+                    <!-- <div id="carImageCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div
+                            class="carousel-item"
+                            *ngFor="let img of carImages; let i = index"
+                            [class.active]="i === 0"
+                            >
+                            <img [src]="img" class="d-block w-100" style="height:350px; object-fit:cover;">
+                            </div>
+                        </div>
+
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carImageCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+
+                        <button class="carousel-control-next" type="button" data-bs-target="#carImageCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+
+                        </div> -->
+
+                        <ngb-carousel *ngIf="carImages.length" [interval]="2000" [animation]="false">
+                            <ng-template ngbSlide *ngFor="let img of carImages">
+                                <img [src]="img" class="car_image">
+                            </ng-template>
+                        </ngb-carousel>
+
+                    <!-- <img [src]="carData.imageUrl || 'assets/car1.jpg'" class="car_image"> -->
                 </div>
                 <div class="car_reg_section pt-2 text-end">Registration Number : <span class="car_reg">{{carData?.registrationNumber}}</span></div>
             </div>
         </div>
         <!-- <hr> -->
-        <div class="row pt-3 pb-2">
-            <div class="spec_heading">Additional Information</div>
-        </div>
         <div class="row pb-5">
-            <div class="col-12 col-md-4 d-flex pb-2">
-                <div class=" car_info_card d-flex justify-space-around align-center">   
-                    <div>
-                        <img src="assets/icons/car_technician.png" class="info_icon">
+            <div class="col-12 col-md-8"> 
+                <div class="row">
+                    <div class="spec_heading">Additional Information</div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-6 d-flex pb-4">
+                        <div class=" car_info_card d-flex justify-space-around align-center">   
+                            <div>
+                                <img src="assets/icons/car_technician.png" class="info_icon">
+                            </div>
+                            <div>
+                                <div class="car_info_heading pb-3">Basic Information</div>
+                                <div class="info_heading pb-2">Color : <span class="info_description">{{carData?.color}}</span></div>
+                                <div class="info_heading pb-2">Fuel Type : <span class="info_description">{{carData?.fuelType | titlecase}}</span></div>
+                                <div class="info_heading pb-2">Seat Capacity : <span class="info_description">{{carData?.seatCapacity}}</span></div>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <div class="car_info_heading pb-2">Basic Information</div>
-                        <div class="info_heading">Color : <span class="info_description">{{carData?.color}}</span></div>
-                        <div class="info_heading">Fuel Type : <span class="info_description">{{carData?.fuelType | titlecase}}</span></div>
-                        <div class="info_heading">Seat Capacity : <span class="info_description">{{carData?.seatCapacity}}</span></div>
+                    <div class="col-12 col-md-6 d-flex pb-4">
+                        <div class=" car_info_card d-flex justify-space-around align-center">   
+                            <div>
+                                <img src="assets/icons/person_performance.png" class="info_icon">
+                            </div>
+                            <div>
+                                <div class="car_info_heading pb-3">Performance</div>
+                                <div class="info_heading pb-2">Total Kilometer : <span class="info_description">{{carData?.totalKilometer}}</span></div>
+                                <div class="info_heading pb-2">No of Owner : <span class="info_description">{{carData?.owners}}</span></div>
+                                <div class="info_heading pb-2">Mileage : <span class="info_description">{{carData?.mileage}}</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 d-flex pb-4">
+                        <div class=" car_info_card d-flex justify-space-around align-center">   
+                            <div>
+                                <img src="assets/icons/price_info.png" class="info_icon">
+                            </div>
+                            <div>
+                                <div class="car_info_heading pb-3">Price Information</div>
+                                <div class="info_heading pb-2">Resale Price : ₹ <span class="info_description">{{carData?.resalePrice}}</span></div>
+                                <div class="info_heading pb-2">Price Per Day : ₹ <span class="info_description">{{carData?.rentPerDay}}</span></div>
+                                <div class="info_heading pb-2">Price Per KM : ₹ <span class="info_description">{{carData?.rentPerKm}}</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 d-flex pb-4">
+                        <div class=" car_info_card d-flex justify-space-around align-center">   
+                            <div>
+                                <img src="assets/icons/car-usage.png" class="info_icon">
+                            </div>
+                            <div>
+                                <div class="car_info_heading pb-3">Availability</div>
+                                <div class="info_heading pb-2">Available for rent : <span class="info_description">{{carData?.availableForRent}}</span></div>
+                                <div class="info_heading pb-2">Available for sale : <span class="info_description">{{carData?.availableForResale}}</span></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-4 d-flex pb-2">
-                <div class=" car_info_card d-flex justify-space-around align-center">   
-                    <div>
-                        <img src="assets/icons/person_performance.png" class="info_icon">
-                    </div>
-                    <div>
-                        <div class="car_info_heading pb-2">Performance</div>
-                        <div class="info_heading">Total Kilometer : <span class="info_description">{{carData?.totalKilometer}}</span></div>
-                        <div class="info_heading">No of Owner : <span class="info_description">{{carData?.owners}}</span></div>
-                        <div class="info_heading">Mileage : <span class="info_description">{{carData?.mileage}}</span></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 d-flex pb-2">
-                <div class=" car_info_card d-flex justify-space-around align-center">   
-                    <div>
-                        <img src="assets/icons/car-usage.png" class="info_icon">
-                    </div>
-                    <div>
-                        <div class="car_info_heading pb-2">Availability</div>
-                        <div class="info_heading">Available for rent : <span class="info_description">{{carData?.availableForRent}}</span></div>
-                        <div class="info_heading">Available for sale : <span class="info_description">{{carData?.availableForResale}}</span></div>
-                    </div>
+            <div class="col-12 col-md-4">
+                <div class="col-12" *ngIf="carBookedDate">
+                    <div class="spec_heading">Booked Dates</div>
+                    <mat-card class="demo-inline-calendar-card">
+                        <mat-calendar
+                            [dateClass]="dateClass">
+                        </mat-calendar>
+                    </mat-card>
                 </div>
             </div>
         </div>
-         <div class="row pt-3 pb-2" *ngIf="carData?.carIssues && carData?.carIssues != ''">
-            <div class="spec_heading">Issues Requiring Attention</div>
+        <div>
+                <div class="row pt-3 pb-2" *ngIf="carData?.carIssues && carData?.carIssues != ''">
+                    <div class="spec_heading">Issues Requiring Attention</div>
+                </div>
+                <div class="row pb-4" *ngIf="carData?.carIssues && carData?.carIssues != ''">
+                    <div class="col-12 d-flex">
+                        <span class="car_description" [innerHTML]="carData?.carIssues"></span>
+                    </div>
+                </div>
         </div>
-         <div class="row pb-4" *ngIf="carData?.carIssues && carData?.carIssues != ''">
-            <div class="col-12 d-flex">
-                <span class="car_description" [innerHTML]="carData?.carIssues"></span>
-            </div>
-         </div>
         <div class="row pt-3 pb-2">
             <div class="spec_heading">Our Benefits</div>
         </div>
@@ -235,9 +291,9 @@
                                 <div class=" pe-4">
                                     <img src="assets/icons/man.png" class="avatar_circle">
                                 </div>
-                                <div class="px-2">{{ rating.userName }}</div>
+                                <div class="px-2 two_line" [ngbTooltip]="rating.userName">{{ rating.userName }}</div>
                             </div>
-                            <div class="delete_section">
+                            <div class="delete_section" *ngIf="adminRole">
                                 <div><img src="assets/icons/delete_icon.png" class="delete_icon" (click)="deleteReviewModal(rating)"></div>
                             </div>
                         </div>  

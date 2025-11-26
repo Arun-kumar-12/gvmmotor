@@ -7,7 +7,7 @@
   gap: 12px;
 }
 .slot {
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
   padding: 8px;
   border-radius: 6px;
   display:flex;
@@ -24,8 +24,11 @@
   display:flex;
   align-items:center;
   justify-content:center;
-  background:#f9f9f9;
+  /* background:#f9f9f9; */
+  border: 2px dashed #DADCE0;
   margin-bottom:8px;
+  /* Ensure absolutely positioned children are placed relative to this box */
+  position: relative;
 }
 .slot-preview img, .slot-preview video{
   max-width:100%;
@@ -35,6 +38,66 @@
   color:#888;
 }
 .slot-actions{ display:flex; gap:6px; }
-.choose-btn{ background:#1976d2; color:#fff; padding:6px 8px; border-radius:4px; cursor:pointer; }
-.remove-btn{ background:transparent; border:1px solid #ccc; padding:6px 8px; border-radius:4px; cursor:pointer }
+
+.slot-actions.position-absolute{
+  z-index: 10;
+  /* place inside the preview box by default */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hide actions by default; show on hover for desktop. Use .show-actions on mobile. */
+.slot-preview .slot-actions.position-absolute{
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .15s ease;
+}
+
+@media (min-width: 769px) {
+  /* On larger screens show actions on hover */
+  .slot-preview:hover .slot-actions.position-absolute{
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  /* On small screens use the `show-actions` class to reveal actions (toggled by click) */
+  .slot-preview .slot-actions.position-absolute{
+    opacity: 0;
+    pointer-events: none;
+  }
+  .slot-preview.show-actions .slot-actions.position-absolute{
+    opacity: 1;
+    pointer-events: auto;
+  }
+  /* slightly larger tap targets on small screens */
+  .plus_icon{ width: 32px; height: 32px; }
+}
 .dialog-actions{ display:flex; justify-content:flex-end; gap:8px; margin-top:12px }
+
+.plus_icon{
+    width: 25px;
+    height: 25px;
+}
+
+.plus_icon:hover{
+    transform: scale(1.1);
+}
+
+.add_car_section{
+    opacity: 0;
+}
+
+.add_car_section:hover{
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .media-dialog {
+    width: 100%;
+  }
+
+  .add_car_section:hover{
+    opacity: 1;
+}
+}

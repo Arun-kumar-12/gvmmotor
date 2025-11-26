@@ -1,32 +1,38 @@
 <div class="media-dialog">
   <h3>Upload Car Media</h3>
-  <div class="slots-grid">
-    <div class="slot" *ngFor="let s of slots">
-      <div class="slot-label">{{s.label}}</div>
-      <div class="slot-preview" [ngClass]="{'video-slot': s.type==='video'}">
-        <ng-container *ngIf="s.preview; else showUrl">
-          <img *ngIf="s.type==='image'" [src]="s.preview" />
-          <video *ngIf="s.type==='video'" [src]="s.preview" controls></video>
-        </ng-container>
-        <ng-template #showUrl>
-          <img *ngIf="s.url && s.type==='image'" [src]="s.url" />
-          <video *ngIf="s.url && s.type==='video'" [src]="s.url" controls></video>
-          <div *ngIf="!s.url" class="empty-slot">No file</div>
-        </ng-template>
-      </div>
-
-      <div class="slot-actions">
-        <label class="choose-btn">
-          Choose
-          <input type="file" [accept]="s.type==='image' ? 'image/*' : 'video/*'" (change)="onFileChange($event, s)" hidden>
+  <div class="row">
+    <div class="col-12 col-md-4" *ngFor="let s of slots">
+        <div class="">
+            <div class="slot-label">{{s.label}} <span class="text-danger" *ngIf="s.key === 'fullView'">*</span></div>
+            <div class="slot-preview" [ngClass]="{'video-slot': s.type==='video', 'show-actions': s.showActions}" (click)="onSlotClick($event, s)">
+                <ng-container *ngIf="s.preview; else showUrl">
+                <img *ngIf="s.type==='image'" [src]="s.preview" />
+                <!-- <video *ngIf="s.type==='video'" [src]="s.preview" controls></video> -->
+                </ng-container>
+                <ng-template #showUrl>
+                <img *ngIf="s.url && s.type==='image'" [src]="s.url" />
+                <!-- <video *ngIf="s.url && s.type==='video'" [src]="s.url" controls></video> -->
+                <!-- <div *ngIf="!s.url" class="empty-slot">No file</div> -->
+                </ng-template>
+                
+      <div class="position-absolute" (click)="$event.stopPropagation()" [ngClass]="(s.url || s.preview)  ? 'slot-actions ' : ''">
+        <label class=" cursor-pointer" (click)="$event.stopPropagation()">
+        <img src="assets/icons/plus.png" class="plus_icon">
+        <input type="file" [accept]="s.type==='image' ? 'image/*' : 'video/*'" (change)="onFileChange($event, s)" hidden>
         </label>
-        <button class="remove-btn" *ngIf="(s.url || s.preview)" (click)="removeSlot(s)">Remove</button>
+        <span class=" cursor-pointer" *ngIf="(s.url || s.preview)" (click)="$event.stopPropagation(); removeSlot(s)">
+          <img src="assets/icons/delete.png" class="plus_icon">
+        </span>
       </div>
+            </div>
+        </div>
+
     </div>
   </div>
-
-  <div class="dialog-actions">
-    <button mat-button (click)="close()">Cancel</button>
-    <button mat-raised-button color="primary" (click)="save()" [disabled]="uploading">Save</button>
-  </div>
+  <div class="row pt-4 justify-end">
+            <div class="col-md-6 col-12 d-flex pb-2  flex-column flex-md-row">
+                <button (click)="close()" class="cancel_button pb-2">Cancel</button>
+                <button  class="button_style" (click)="save()" [disabled]="uploading">Save</button>
+            </div>
+        </div>
 </div>

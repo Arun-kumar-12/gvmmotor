@@ -9,6 +9,7 @@ interface MediaSlot {
   file?: File | null;
   preview?: string | ArrayBuffer | null;
   url?: string;
+  showActions?: boolean;
 }
 
 @Component({
@@ -40,9 +41,13 @@ export class CarMediaDialogComponent {
     // populate existing urls if provided
     if (data) {
       const incoming = data.media || {};
+      console.log("incoming",incoming);
+      
       this.slots.forEach(s => {
         if (incoming[s.key]) {
           s.url = incoming[s.key];
+          // ensure showActions defaults to false
+          s.showActions = false;
         }
       });
     }
@@ -64,6 +69,26 @@ export class CarMediaDialogComponent {
       // show a simple preview (object URL)
       slot.preview = URL.createObjectURL(file);
       this.uploadSlot(slot);
+    }
+  }
+  
+  onSlotClick(event: Event, slot: MediaSlot) {
+    // only toggle actions on small screens (mobile)
+    try {
+      const isMobile = window && window.innerWidth <= 768;
+      if (!isMobile) return;
+
+      // toggle the clicked slot and close others
+      this.slots.forEach(s => {
+        if (s === slot) {
+          s.showActions = !s.showActions;
+        } else {
+          s.showActions = false;
+        }
+      });
+    } catch (e) {
+      // ignore in environments without window
+      slot.showActions = !slot.showActions;
     }
   }
 

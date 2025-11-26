@@ -63,6 +63,7 @@ export class EditCarComponent implements OnInit {
       ]
     ]
   };
+  carImages:any = [];
 
   constructor(private router:Router,
     private route:ActivatedRoute,
@@ -86,11 +87,26 @@ export class EditCarComponent implements OnInit {
     //fetch car details from backend using id
     this.service.getCarInfoById(id).subscribe((car:any)=>{
       this.carData = car;
+      this.carImages = 
+      [
+        this.carData?.fullView || this.carData?.imageUrl,
+        this.carData?.frontView,
+        this.carData?.backView,
+        this.carData?.rightSideView,
+        this.carData?.leftSideView,
+        this.carData?.interiorFrontSeat,
+        this.carData?.interiorBackSeat,
+        this.carData?.interiorDashboard
+      ].filter(img => img);
+
+      console.log("carImages", this.carImages);
       this.createForm(this.carData);
     })
   }
 
   createForm(carData?:any){
+    console.log("carData",carData);
+    
     this.carForm = new FormGroup({
       brand:new FormControl(carData ? carData.brand : '', Validators.required),
       model:new FormControl(carData ? carData.model : '', Validators.required),
@@ -110,23 +126,46 @@ export class EditCarComponent implements OnInit {
       availableForSale:new FormControl(carData ? carData.availableForResale : false),
       availableForRent:new FormControl(carData ? carData.availableForRent : false),
       description:new FormControl(carData ? carData.description : '', Validators.required),
-      carIssues:new FormControl(carData ? carData?.carIssues : ''),
+      carIssues:new FormControl(carData ? carData?.carIssues : '', Validators.required),
       totalKilometer:new FormControl(carData ? carData.totalKilometer : '', Validators.required),
       owners:new FormControl(carData ? carData.owners : '', Validators.required),
       images: new FormControl(carData ? carData.images || {} : {}),
       video: new FormControl(carData ? carData.videoUrl || '' : ''),
+      fullView: new FormControl((carData?.fullView && carData?.fullView != '') ? carData.fullView : null),
+        frontView: new FormControl(carData?.frontView && carData?.frontView != '' ? carData.frontView : null),
+        backView: new FormControl(carData?.backView && carData?.backView != '' ? carData.backView : null),
+        rightSideView: new FormControl(carData?.rightSideView  && carData?.rightSideView != '' ? carData.rightSideView : null),
+        leftSideView: new FormControl(carData?.leftSideView && carData?.leftSideView != ''? carData.leftSideView : null),
+        interiorFrontSeat: new FormControl(carData?.interiorFrontSeat && carData?.interiorFrontSeat != ''? carData.interiorFrontSeat : null),
+        interiorBackSeat: new FormControl(carData?.interiorBackSeat && carData?.interiorBackSeat != ''? carData.interiorBackSeat : null),
+        interiorDashboard: new FormControl(carData?.interiorDashboard && carData?.interiorDashboard != ''? carData.interiorDashboard : null),
     });
     // choose preview image priority: images.fullView -> existing imageUrl -> null
     this.previewImage = (carData?.images?.fullView) ? carData.images.fullView : (carData ? carData.imageUrl : null);
+    console.log("carForm",this.carForm);
+    
   }
 
   openMediaDialog(){
-    const currentMedia = this.carForm.value.images || {};
+    const currentMedia = {
+        fullView: this.carForm.value.fullView != '' ? this.carForm.value.fullView : null,
+        frontView: this.carForm.value.frontView != '' ? this.carForm.value.frontView : null,
+        backView: this.carForm.value.backView != ''? this.carForm.value.backView : null,
+        rightSideView: this.carForm.value.rightSideView != '' ? this.carForm.value.rightSideView : null,
+        leftSideView: this.carForm.value.leftSideView != ''? this.carForm.value.leftSideView : null,
+        interiorFrontSeat: this.carForm.value.interiorFrontSeat != ''? this.carForm.value.interiorFrontSeat : null,
+        interiorBackSeat: this.carForm.value.interiorBackSeat != ''? this.carForm.value.interiorBackSeat : null,
+        interiorDashboard: this.carForm.value.interiorDashboard != ''? this.carForm.value.interiorDashboard : null,
+        video: this.carForm.value.video
+    }
     if(this.carForm.value.video){
       currentMedia['video'] = this.carForm.value.video;
     }
+    console.log(currentMedia);
+    
     const dialogRef = this.dialog.open(CarMediaDialogComponent, {
       width: '850px',
+      height:'90vh',
       data: { media: currentMedia }
     });
 
@@ -143,7 +182,17 @@ export class EditCarComponent implements OnInit {
           interiorBackSeat: result.interiorBackSeat || '',
           interiorDashboard: result.interiorDashboard || ''
         };
-        this.carForm.patchValue({ images: images, video: result.video || '' });
+        this.carForm.patchValue(
+          { images: images, video: result.video || '',
+            fullView: result.fullView || '',
+            frontView: result.frontView || '',
+            backView: result.backView || '',
+            rightSideView: result.rightSideView || '',
+            leftSideView: result.leftSideView || '',
+            interiorFrontSeat: result.interiorFrontSeat || '',
+            interiorBackSeat: result.interiorBackSeat || '',
+            interiorDashboard: result.interiorDashboard || '',
+           });
         // update main previewImage if fullView present
         if(images.fullView){
           this.previewImage = images.fullView;
@@ -198,6 +247,14 @@ uploadImage(file:Blob) {
         year: this.carForm.value.year,
         imageUrl: this.carForm.value.image,
         images: this.carForm.value.images,
+        fullView: this.carForm.value.images.fullView != '' ? this.carForm.value.images.fullView : null,
+        frontView: this.carForm.value.images.frontView != '' ? this.carForm.value.images.frontView : null,
+        backView: this.carForm.value.images.backView != ''? this.carForm.value.images.backView : null,
+        rightSideView: this.carForm.value.images.rightSideView != '' ? this.carForm.value.images.rightSideView : null,
+        leftSideView: this.carForm.value.images.leftSideView != ''? this.carForm.value.images.leftSideView : null,
+        interiorFrontSeat: this.carForm.value.images.interiorFrontSeat != ''? this.carForm.value.images.interiorFrontSeat : null,
+        interiorBackSeat: this.carForm.value.images.interiorBackSeat != ''? this.carForm.value.images.interiorBackSeat : null,
+        interiorDashboard: this.carForm.value.images.interiorDashboard != ''? this.carForm.value.images.interiorDashboard : null,
         videoUrl: this.carForm.value.video,
         registrationNumber: this.carForm.value.registrationNumber,
         mileage: this.carForm.value.mileage,
@@ -245,6 +302,14 @@ uploadImage(file:Blob) {
         year: this.carForm.value.year,
         imageUrl: this.carForm.value.image,
         images: this.carForm.value.images,
+        fullView: this.carForm.value.images.fullView != '' ? this.carForm.value.images.fullView : null,
+        frontView: this.carForm.value.images.frontView != '' ? this.carForm.value.images.frontView : null,
+        backView: this.carForm.value.images.backView != ''? this.carForm.value.images.backView : null,
+        rightSideView: this.carForm.value.images.rightSideView != '' ? this.carForm.value.images.rightSideView : null,
+        leftSideView: this.carForm.value.images.leftSideView != ''? this.carForm.value.images.leftSideView : null,
+        interiorFrontSeat: this.carForm.value.images.interiorFrontSeat != ''? this.carForm.value.images.interiorFrontSeat : null,
+        interiorBackSeat: this.carForm.value.images.interiorBackSeat != ''? this.carForm.value.images.interiorBackSeat : null,
+        interiorDashboard: this.carForm.value.images.interiorDashboard != ''? this.carForm.value.images.interiorDashboard : null,
         videoUrl: this.carForm.value.video,
         registrationNumber: this.carForm.value.registrationNumber,
         mileage: this.carForm.value.mileage,

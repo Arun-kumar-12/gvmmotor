@@ -7,6 +7,7 @@ import { AddReviewComponent } from 'src/app/shared/add-review/add-review.compone
 import { CarPurchaseComponent } from 'src/app/shared/car-purchase/car-purchase.component';
 import { ConfirmationModalComponent } from 'src/app/shared/confirmation-modal/confirmation-modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-car-info',
@@ -19,6 +20,9 @@ export class CarInfoComponent implements OnInit {
   carData:any;
   adminRole:boolean = false;
   carRatings:any;
+  carImages:any = [];
+  bookedDates: Date[] = [];
+  carBookedDate:boolean = false;
   constructor(private router:Router,
     private route:ActivatedRoute,
     private service:CommonServiceService,
@@ -30,6 +34,7 @@ export class CarInfoComponent implements OnInit {
     this.carId = this.route.snapshot.paramMap.get('id');
     this.adminRole = sessionStorage.getItem("userRole") === 'ADMIN';
     this.getCarDetails(this.carId);
+    this.loadBookedDates()
     this.getRatingsForCar();
   }
 
@@ -37,6 +42,22 @@ export class CarInfoComponent implements OnInit {
     //fetch car details from backend using id
     this.service.getCarInfoById(id).subscribe((car:any)=>{
       this.carData = car;
+      console.log("this.carData",this.carData);
+      
+      this.carImages = 
+      [
+        this.carData?.fullView || this.carData?.imageUrl,
+        this.carData?.frontView,
+        this.carData?.backView,
+        this.carData?.rightSideView,
+        this.carData?.leftSideView,
+        this.carData?.interiorFrontSeat,
+        this.carData?.interiorBackSeat,
+        this.carData?.interiorDashboard
+      ].filter(img => img);
+
+      console.log("carImages", this.carImages);
+      
     })
   }
 
@@ -56,6 +77,10 @@ export class CarInfoComponent implements OnInit {
         carId: this.carId,
         carData: this.carData
       }
+    });
+
+    this.modal.afterAllClosed.subscribe((response:any)=>{
+        this.loadBookedDates();
     });
   }
 
@@ -131,4 +156,30 @@ export class CarInfoComponent implements OnInit {
         this.snackbar.open("Error Deleting Review",'ok',{duration:3000});
       })
     }
+
+    loadBookedDates() {
+      console.log("Called");
+      
+      this.carBookedDate = false;
+      this.service.getBookedDatesForCar(this.carId).subscribe((dates: string[]) => {
+        this.bookedDates = dates.map(d => new Date(d));
+        console.log("this.bookedDates",this.bookedDates);
+        this.carBookedDate = true;
+      });
+    }
+
+    /** This function will be called by the calendar for every date */
+    dateClass: MatCalendarCellClassFunction<Date>  = (cellDate: Date): string => {
+      console.log("cellDate",cellDate);
+      // const cellDateStr = cellDate.toDateString();
+      // console.log("cellDateStr",cellDateStr);
+      console.log("bookedDates",this.bookedDates);
+      
+      const isBooked = this.bookedDates.some(d =>
+        new Date(d).toDateString() == new Date(cellDate).toDateString() 
+      );
+      console.log("isBooked",isBooked);
+      
+      return isBooked ? 'booked-date' : '';
+    };
 }

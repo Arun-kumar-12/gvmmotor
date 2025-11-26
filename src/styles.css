@@ -190,6 +190,7 @@ mat-tab-body .mat-tab-body-content{
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+    min-height: 40px;
 }
 
 .custom-blog-angular-editor {
@@ -209,6 +210,13 @@ mat-tab-body .mat-tab-body-content{
 
 .angular-editor-textarea{
     font-size: 14px;
+}
+
+
+.booked-date .mat-calendar-body-cell-content  {
+  background-color: #1d9fd8 !important;
+  color: white !important;
+  /* border-radius: 50%; */
 }
 
 @media (max-width: 768px) {

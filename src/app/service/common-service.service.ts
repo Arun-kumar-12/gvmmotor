@@ -126,5 +126,9 @@ getOrderByEmail(email:any){
   return this.http.get(`${this.baseUrl}orders/customer/${email}`);
 }
 
+getBookedDatesForCar(carId:any){
+  return this.http.get<string[]>(`${this.baseUrl}bookings/booked-dates/${carId}`); 
+}
+
 
 }

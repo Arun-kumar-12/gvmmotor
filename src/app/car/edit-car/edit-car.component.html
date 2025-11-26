@@ -29,10 +29,15 @@
                         <div class="image_section" *ngIf="previewImage">
                             <div
                                 class="upload_section position-relative cursor-pointer edit_image_section"
-                                (click)="openMediaDialog()">
+                                >
                                 
-                                <img [src]="previewImage" class="w-100 h-100 position-relative">
-                                <div class="position-absolute edit_icon_section">
+                                <!-- <img [src]="previewImage" class="w-100 h-100 position-relative"> -->
+                                <ngb-carousel *ngIf="carImages.length" [interval]="2000" [animation]="false">
+                                    <ng-template ngbSlide *ngFor="let img of carImages">
+                                        <img [src]="img" class="car_image">
+                                    </ng-template>
+                                </ngb-carousel>
+                                <div class="position-absolute edit_icon_section" (click)="openMediaDialog()">
                                     <img src="assets/icons/edit.png" class="plus_icon edit_hover">
                                 </div>
                             </div>
