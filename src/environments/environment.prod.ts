@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://TEMP-BACKEND-URL/api'
+  apiUrl: 'gvmmotor-backend-production.up.railway.app'
 };
